@@ -1,0 +1,725 @@
+[
+    {
+        "id": "afdcf13fc7858566",
+        "type": "tab",
+        "label": "流程2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "49afae8460698805",
+        "type": "ui-table",
+        "z": "afdcf13fc7858566",
+        "group": "84e1f4c0d008fc77",
+        "name": "",
+        "label": "text",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": true,
+        "showSearch": true,
+        "selectionType": "none",
+        "columns": [],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "96687f5cd38947a2",
+        "type": "inject",
+        "z": "afdcf13fc7858566",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"todo\":\"aaa\",\"done\":true},{\"todo\":\"bbb\",\"done\":false}]",
+        "payloadType": "json",
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "fa711b3ce9aff814"
+            ]
+        ]
+    },
+    {
+        "id": "7198d3bd81e0c726",
+        "type": "http request",
+        "z": "afdcf13fc7858566",
+        "name": "get list",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:8008/todo/list",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 310,
+        "y": 500,
+        "wires": [
+            [
+                "39d05ec46ad98fca"
+            ]
+        ]
+    },
+    {
+        "id": "31b2b97a8496b934",
+        "type": "debug",
+        "z": "afdcf13fc7858566",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "61f2846ca9c0eafb",
+        "type": "http request",
+        "z": "afdcf13fc7858566",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:8008/todo/add",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": ""
+            }
+        ],
+        "x": 940,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0bddc0744e75454d",
+        "type": "http request",
+        "z": "afdcf13fc7858566",
+        "name": "Update",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "msg.url",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 820,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eaf6163e73720efd",
+        "type": "http request",
+        "z": "afdcf13fc7858566",
+        "name": "Delete",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "msg.url",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 930,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39d05ec46ad98fca",
+        "type": "json",
+        "z": "afdcf13fc7858566",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 470,
+        "y": 500,
+        "wires": [
+            [
+                "fa711b3ce9aff814",
+                "31b2b97a8496b934"
+            ]
+        ]
+    },
+    {
+        "id": "fa711b3ce9aff814",
+        "type": "function",
+        "z": "afdcf13fc7858566",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload.list\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "49afae8460698805"
+            ]
+        ]
+    },
+    {
+        "id": "c0a3c9b88158740f",
+        "type": "ui-text-input",
+        "z": "afdcf13fc7858566",
+        "group": "310d7133f52fabe4",
+        "name": "add_task",
+        "label": "add task",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "topic": "task",
+        "topicType": "str",
+        "mode": "text",
+        "tooltip": "task",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 140,
+        "y": 560,
+        "wires": [
+            [
+                "2b3870ea60f0bda9"
+            ]
+        ]
+    },
+    {
+        "id": "5d7d0fbcf824c575",
+        "type": "ui-button",
+        "z": "afdcf13fc7858566",
+        "group": "84e1f4c0d008fc77",
+        "name": "",
+        "label": "button",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "7198d3bd81e0c726"
+            ]
+        ]
+    },
+    {
+        "id": "d84df9b04fd2863d",
+        "type": "debug",
+        "z": "afdcf13fc7858566",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "e8f7814911f8234b",
+        "type": "function",
+        "z": "afdcf13fc7858566",
+        "name": "function 2",
+        "func": "let TODO = {\n    \"Task\": \"\",\n    \"Done\": false\n};\n\n// 檢查 msg.topic 以獲取對應的輸入\nif (msg.topic == \"task\") {\n    TODO.Task = msg.payload;  // 獲取任務\n} else if (msg.topic == \"done\") {\n    TODO.Done = msg.payload;  // 獲取完成狀態\n}\n\n// 返回整個 TODO 對象\nmsg.payload = TODO;  // 或者 JSON.stringify(TODO) 如果需要字符串格式\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 580,
+        "wires": [
+            [
+                "61f2846ca9c0eafb"
+            ]
+        ]
+    },
+    {
+        "id": "3ec410dad4eec9f2",
+        "type": "ui-switch",
+        "z": "afdcf13fc7858566",
+        "name": "add_status",
+        "label": "done?",
+        "group": "310d7133f52fabe4",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "done",
+        "topicType": "str",
+        "style": "",
+        "className": "",
+        "clickableArea": "switch",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "2b3870ea60f0bda9"
+            ]
+        ]
+    },
+    {
+        "id": "2b3870ea60f0bda9",
+        "type": "ui-button",
+        "z": "afdcf13fc7858566",
+        "group": "310d7133f52fabe4",
+        "name": "寫不出來QQ",
+        "label": "button",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "x": 450,
+        "y": 580,
+        "wires": [
+            [
+                "e8f7814911f8234b",
+                "d84df9b04fd2863d"
+            ]
+        ]
+    },
+    {
+        "id": "54c3752e0da9c4e0",
+        "type": "ui-switch",
+        "z": "afdcf13fc7858566",
+        "name": "update_status",
+        "label": "done?",
+        "group": "a51ed5016e89b57c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "done",
+        "topicType": "str",
+        "style": "",
+        "className": "",
+        "clickableArea": "switch",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 180,
+        "y": 720,
+        "wires": [
+            [
+                "055f5f601a0e2f9f"
+            ]
+        ]
+    },
+    {
+        "id": "6d8061dcb771c296",
+        "type": "ui-text-input",
+        "z": "afdcf13fc7858566",
+        "group": "a51ed5016e89b57c",
+        "name": "update_task",
+        "label": "update task",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "topic": "task",
+        "topicType": "str",
+        "mode": "text",
+        "tooltip": "task",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 170,
+        "y": 680,
+        "wires": [
+            [
+                "055f5f601a0e2f9f"
+            ]
+        ]
+    },
+    {
+        "id": "e5d9a2e46dbe82a3",
+        "type": "function",
+        "z": "afdcf13fc7858566",
+        "name": "function 3",
+        "func": "let task = \"\";\nlet done = \"\";\n\nlet TODO = {\n    \"Task\": task,\n    \"Done\": done\n};\n\nif (msg.topic == \"task\") {\n    TODO.Task = msg.payload;  \n}\nelse if (msg.topic == \"done\") {\n    TODO.Done = msg.payload;  \n}\n\nmsg.payload = TODO;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 700,
+        "wires": [
+            [
+                "0bddc0744e75454d"
+            ]
+        ]
+    },
+    {
+        "id": "055f5f601a0e2f9f",
+        "type": "ui-button",
+        "z": "afdcf13fc7858566",
+        "group": "310d7133f52fabe4",
+        "name": "寫不出來QQ",
+        "label": "button",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "x": 430,
+        "y": 700,
+        "wires": [
+            [
+                "e5d9a2e46dbe82a3"
+            ]
+        ]
+    },
+    {
+        "id": "28e0bd4b66782c41",
+        "type": "ui-button",
+        "z": "afdcf13fc7858566",
+        "group": "1f4d8229e82af649",
+        "name": "寫不出來",
+        "label": "button",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "emulateClick": true,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "x": 380,
+        "y": 820,
+        "wires": [
+            [
+                "c106d9a555a4bb72",
+                "b143d7cb862a0c61"
+            ]
+        ]
+    },
+    {
+        "id": "c106d9a555a4bb72",
+        "type": "debug",
+        "z": "afdcf13fc7858566",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "caef38e1fb5e2964",
+        "type": "ui-text-input",
+        "z": "afdcf13fc7858566",
+        "group": "1f4d8229e82af649",
+        "name": "delete_task",
+        "label": "update task",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "topic": "task",
+        "topicType": "str",
+        "mode": "text",
+        "tooltip": "task",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 190,
+        "y": 820,
+        "wires": [
+            [
+                "28e0bd4b66782c41"
+            ]
+        ]
+    },
+    {
+        "id": "b143d7cb862a0c61",
+        "type": "function",
+        "z": "afdcf13fc7858566",
+        "name": "function 4",
+        "func": "let task = msg.payload;\n\nmsg.url = `localhost:8008/todo/delete/${task}`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 820,
+        "wires": [
+            [
+                "eaf6163e73720efd"
+            ]
+        ]
+    },
+    {
+        "id": "84e1f4c0d008fc77",
+        "type": "ui-group",
+        "name": "GET",
+        "page": "0d2de8c271623db6",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "310d7133f52fabe4",
+        "type": "ui-group",
+        "name": "ADD",
+        "page": "0d2de8c271623db6",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "a51ed5016e89b57c",
+        "type": "ui-group",
+        "name": "UPDATE",
+        "page": "0d2de8c271623db6",
+        "width": "6",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "1f4d8229e82af649",
+        "type": "ui-group",
+        "name": "DELETE",
+        "page": "0d2de8c271623db6",
+        "width": "6",
+        "height": "1",
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "0d2de8c271623db6",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "34c23c5e16978104",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "223b723af43fb033",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "34c23c5e16978104",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "showPageTitle": true,
+        "navigationStyle": "default",
+        "titleBarStyle": "default"
+    },
+    {
+        "id": "223b723af43fb033",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    }
+]
